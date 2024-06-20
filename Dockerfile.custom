@@ -1,0 +1,15 @@
+FROM freqtradeorg/freqtrade:stable
+
+# grabing strategy from web
+ADD https://raw.githubusercontent.com/iterativv/NostalgiaForInfinity/main/NostalgiaForInfinityX4.py /freqtrade/user_data/strategies/docker-grab/
+VOLUME /freqtrade/user_data/strategies/docker-grab/
+
+# Switch user to root if you must install something from apt
+# Don't forget to switch the user back below!
+USER root
+
+# Dependencies
+RUN pip install pandas-ta
+
+#switching back to normal user
+USER ftuser
